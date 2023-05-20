@@ -10,7 +10,6 @@ data class CurrencyInfoData(
     val CZK: CurrencyInfo,
     val DKK: CurrencyInfo,
     val EUR: CurrencyInfo,
-    val GBR: CurrencyInfo,
     val HKD: CurrencyInfo,
     val HRK: CurrencyInfo,
     val HUF: CurrencyInfo,
@@ -34,5 +33,5 @@ data class CurrencyInfoData(
     val TRY: CurrencyInfo,
     val USD: CurrencyInfo,
     val ZAR: CurrencyInfo,
-    val listCurrencyInfo: List<CurrencyInfo>
+
 )

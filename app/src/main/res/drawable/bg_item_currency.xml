@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape
     xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android" tools:ignore="StateListReachable">
-    <solid android:color="#A9A9A9"/>
+    <solid android:color="#FEDBD0"/>
     <corners
         android:topLeftRadius="20dp"
         android:topRightRadius="20dp"

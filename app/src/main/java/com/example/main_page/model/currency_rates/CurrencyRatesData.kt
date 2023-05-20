@@ -10,7 +10,6 @@ data class CurrencyRatesData(
     val CZK: Double?,
     val DKK: Double?,
     val EUR: Double?,
-    val GBR: Double?,
     val HKD: Double?,
     val HRK: Double?,
     val HUF: Double?,

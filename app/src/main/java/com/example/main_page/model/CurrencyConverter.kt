@@ -20,7 +20,6 @@ object CurrencyConverter {
                 CZK = response.CZK,
                 DKK = response.DKK,
                 EUR = response.EUR,
-                GBR = response.GBR,
                 HKD = response.HKD,
                 HRK = response.HRK,
                 HUF = response.HUF,
@@ -59,7 +58,6 @@ object CurrencyConverter {
         currencies.add(fromNetwork(response.CZK, rateResponse.CZK))
         currencies.add(fromNetwork(response.DKK, rateResponse.DKK))
         currencies.add(fromNetwork(response.EUR, rateResponse.EUR))
-        currencies.add(fromNetwork(response.GBR, rateResponse.GBR))
         currencies.add(fromNetwork(response.HKD, rateResponse.HKD))
         currencies.add(fromNetwork(response.HRK, rateResponse.HRK))
         currencies.add(fromNetwork(response.HUF, rateResponse.HUF))

@@ -1,6 +1,6 @@
 package com.example.main_page.ui.adapter
 
-enum class EnumWeatherDescriptionType(val description: String) {
+enum class EnumCurrencyDescriptionType(val description: String) {
     AUD("Australian Dollar"),
     BGN("Bulgarian Lev"),
     BRL("Brazilian Real"),

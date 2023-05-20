@@ -1,9 +1,7 @@
 package com.example.main_page.api
 
 import com.example.main_page.api.model.currency_info_data_response.CurrencyInfoDataListResponse
-import com.example.main_page.api.model.currency_info_data_response.CurrencyInfoDataResponse
 import com.example.main_page.api.model.currency_rates_data_response.CurrencyRatesDataListResponse
-import com.example.main_page.api.model.currency_rates_data_response.CurrencyRatesDataResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -19,4 +17,5 @@ interface CurrencyApi {
     suspend fun getCurrencyRatesData(
         @Query("apikey") apikey: String,
     ): CurrencyRatesDataListResponse
+
 }

@@ -22,8 +22,6 @@ data class CurrencyInfoDataResponse(
     val DKK: CurrencyInfoResponse?,
     @SerializedName("EUR")
     val EUR: CurrencyInfoResponse?,
-    @SerializedName("GBR")
-    val GBR: CurrencyInfoResponse?,
     @SerializedName("HKD")
     val HKD: CurrencyInfoResponse?,
     @SerializedName("HRK")
@@ -70,5 +68,5 @@ data class CurrencyInfoDataResponse(
     val USD: CurrencyInfoResponse?,
     @SerializedName("ZAR")
     val ZAR: CurrencyInfoResponse?
-
+    
 )

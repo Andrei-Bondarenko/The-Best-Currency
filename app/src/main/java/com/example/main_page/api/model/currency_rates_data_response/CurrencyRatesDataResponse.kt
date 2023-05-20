@@ -21,8 +21,6 @@ data class CurrencyRatesDataResponse(
     val DKK: Double?,
     @SerializedName("EUR")
     val EUR: Double?,
-    @SerializedName("GBR")
-    val GBR: Double?,
     @SerializedName("HKD")
     val HKD: Double?,
     @SerializedName("HRK")

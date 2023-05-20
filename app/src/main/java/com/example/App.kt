@@ -2,7 +2,7 @@ package com.example
 
 import android.app.Application
 import com.example.common.NetworkModule
-import com.example.main_page.di.CurrencyModule
+import com.example.convert_currencies.di.CurrencyModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext
 import timber.log.Timber

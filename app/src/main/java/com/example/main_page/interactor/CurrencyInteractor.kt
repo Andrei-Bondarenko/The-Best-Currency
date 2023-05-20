@@ -10,4 +10,5 @@ class CurrencyInteractor(
         return currencyInfoRepository.getCurrencyInfoData(apikey)
     }
 
+
 }

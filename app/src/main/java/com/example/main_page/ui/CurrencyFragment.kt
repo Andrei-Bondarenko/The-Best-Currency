@@ -5,18 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.common.base_ui.BaseFragment
+import com.example.convert_currencies.ui.CurrencyConvertFragment
 import com.example.main_page.model.currency_info.CurrencyInfo
 import com.example.main_page.ui.adapter.CurrencyAdapter
 import com.example.thebestcurrency.R
 import com.example.thebestcurrency.databinding.FragmentCurrencyMainPageBinding
+import com.example.utils.extensions.replace
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 
 
 private const val APIKEY = "Ujqc2SLtPZv6C4WcyTMrPHIfbRrjnweCUmAm3JWn"
 
-class CurrencyFragment: BaseFragment(R.layout.fragment_currency_main_page) {
+class CurrencyFragment : BaseFragment(R.layout.fragment_currency_main_page) {
 
     private val viewModel: CurrencyViewModel by inject()
     private lateinit var binding: FragmentCurrencyMainPageBinding
@@ -28,6 +33,9 @@ class CurrencyFragment: BaseFragment(R.layout.fragment_currency_main_page) {
 
     private val adapter: CurrencyAdapter = CurrencyAdapter()
 
+    private val layoutManager: LinearLayoutManager by lazy {
+        LinearLayoutManager(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,14 +50,28 @@ class CurrencyFragment: BaseFragment(R.layout.fragment_currency_main_page) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            recyclerView.adapter = adapter
-            viewModel.getCurrencyData(apikey = APIKEY)
-            observe(viewModel.currencyInfoFlow) { currencyData ->
-                showData(currencyData)
+
+
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.currencyInfoFlow.collect { currencyData ->
+                    showData(currencyData)
+                }
             }
 
-            observe(viewModel.isLoading) { isLoading ->
-                progressCurrency.isVisible = isLoading
+            recyclerView.layoutManager = layoutManager
+            recyclerView.setHasFixedSize(true)
+            adapter.onAttachedToRecyclerView(recyclerView)
+            recyclerView.adapter = adapter
+
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.isLoading.collect { isLoading ->
+                    progressCurrency.isVisible = isLoading
+                }
+            }
+            viewModel.getCurrencyData(apikey = APIKEY)
+
+            convertCurrencyBtn.setOnClickListener {
+                replace(CurrencyConvertFragment.newInstance(), R.id.fragmentContainer)
             }
         }
     }
@@ -59,3 +81,4 @@ class CurrencyFragment: BaseFragment(R.layout.fragment_currency_main_page) {
         data?.let { adapter.setData(it) }
     }
 }
+

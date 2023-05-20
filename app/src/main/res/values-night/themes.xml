@@ -12,5 +12,14 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-    </style>
+
+
+
+</style>
+
+<style name="MyDropDownNav">
+<item name="android:background">@drawable/spinner_background</item>
+<item name="android:popupBackground">@drawable/spinner_menu_dropdown_panel</item>
+<item name="android:dropDownSelector">@drawable/selectable_background</item>
+</style>
 </resources>
