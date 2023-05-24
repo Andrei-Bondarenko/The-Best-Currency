@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.main_page.ui.CurrencyFragment
+import com.example.main_page.ui.RegistrationFragment
 import com.example.thebestcurrency.R
 
 class RootActivity : AppCompatActivity() {
@@ -13,7 +14,7 @@ class RootActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_root)
-        val fragment = CurrencyFragment()
+        val fragment = RegistrationFragment()
         replace(fragment,R.id.fragmentContainer)
     }
 

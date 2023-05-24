@@ -1,6 +1,6 @@
-package com.example.main_page.ui.adapter
+package com.example.convert_currencies.ui
 
-enum class EnumCurrencyRatesDescriptionType(val symbol: String) {
+enum class EnumCurrencyNamesDescriptionType(val currencyName: String) {
     AUD("AUD"),
     BGN("BGN"),
     BRL("BRL"),
@@ -10,7 +10,6 @@ enum class EnumCurrencyRatesDescriptionType(val symbol: String) {
     CZK("CZK"),
     DKK("DKK"),
     EUR("EUR"),
-    GBR("GBR"),
     HKD("HKD"),
     HRK("HRK"),
     HUF("HUF"),
@@ -33,5 +32,5 @@ enum class EnumCurrencyRatesDescriptionType(val symbol: String) {
     THB("THB"),
     TRY("TRY"),
     USD("USD"),
-    ZAR("ZAR")
+    ZAR("ZAR"),
 }

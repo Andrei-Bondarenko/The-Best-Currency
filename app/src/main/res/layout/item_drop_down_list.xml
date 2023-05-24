@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drop_down_list_item"
+    style="?android:attr/spinnerItemStyle"
+    android:background="@drawable/bg_item_list_drop_down"
+    android:textColor="@color/white"
+    android:singleLine="true"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:ellipsize="marquee"
+    android:textAlignment="inherit"
+    android:textSize="30sp"
+    android:gravity="center_vertical"
+    >
+
+</TextView>

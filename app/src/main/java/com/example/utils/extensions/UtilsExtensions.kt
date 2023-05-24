@@ -1,11 +1,52 @@
 package com.example.utils.extensions
 
 import com.example.convert_currencies.model.currency_info.CurrencyInfoData
+import com.example.convert_currencies.ui.EnumCurrencyNamesDescriptionType
 import com.example.main_page.ui.adapter.EnumCurrencyDescriptionType
-import com.example.main_page.ui.adapter.EnumCurrencyRatesDescriptionType
+import com.example.convert_currencies.ui.EnumCurrencyRatesDescriptionType
 import com.example.thebestcurrency.R
 
-fun Any.getRate(type: String?, data: CurrencyInfoData?) =
+
+fun Any.getName(currencyName: String, data: CurrencyInfoData?) =
+    when (currencyName) {
+        EnumCurrencyNamesDescriptionType.AUD.currencyName -> data?.AUD?.name
+        EnumCurrencyNamesDescriptionType.BGN.currencyName -> data?.BGN?.name
+        EnumCurrencyNamesDescriptionType.BRL.currencyName -> data?.BRL?.name
+        EnumCurrencyNamesDescriptionType.CAD.currencyName -> data?.CAD?.name
+        EnumCurrencyNamesDescriptionType.CHF.currencyName -> data?.CHF?.name
+        EnumCurrencyNamesDescriptionType.CNY.currencyName -> data?.CNY?.name
+        EnumCurrencyNamesDescriptionType.CZK.currencyName -> data?.CZK?.name
+        EnumCurrencyNamesDescriptionType.DKK.currencyName -> data?.DKK?.name
+        EnumCurrencyNamesDescriptionType.EUR.currencyName -> data?.EUR?.name
+        EnumCurrencyNamesDescriptionType.HKD.currencyName -> data?.HKD?.name
+        EnumCurrencyNamesDescriptionType.HRK.currencyName -> data?.HRK?.name
+        EnumCurrencyNamesDescriptionType.HUF.currencyName -> data?.HUF?.name
+        EnumCurrencyNamesDescriptionType.IDR.currencyName -> data?.IDR?.name
+        EnumCurrencyNamesDescriptionType.ILS.currencyName -> data?.ILS?.name
+        EnumCurrencyNamesDescriptionType.INR.currencyName -> data?.INR?.name
+        EnumCurrencyNamesDescriptionType.ISK.currencyName -> data?.ISK?.name
+        EnumCurrencyNamesDescriptionType.JPY.currencyName -> data?.JPY?.name
+        EnumCurrencyNamesDescriptionType.KRW.currencyName -> data?.KRW?.name
+        EnumCurrencyNamesDescriptionType.MXN.currencyName -> data?.MXN?.name
+        EnumCurrencyNamesDescriptionType.MYR.currencyName -> data?.MYR?.name
+        EnumCurrencyNamesDescriptionType.NOK.currencyName -> data?.NOK?.name
+        EnumCurrencyNamesDescriptionType.NZD.currencyName -> data?.NZD?.name
+        EnumCurrencyNamesDescriptionType.PHP.currencyName -> data?.PHP?.name
+        EnumCurrencyNamesDescriptionType.PLN.currencyName -> data?.PLN?.name
+        EnumCurrencyNamesDescriptionType.RON.currencyName -> data?.RON?.name
+        EnumCurrencyNamesDescriptionType.RUB.currencyName -> data?.RUB?.name
+        EnumCurrencyNamesDescriptionType.SEK.currencyName -> data?.SEK?.name
+        EnumCurrencyNamesDescriptionType.SGD.currencyName -> data?.SGD?.name
+        EnumCurrencyNamesDescriptionType.THB.currencyName -> data?.THB?.name
+        EnumCurrencyNamesDescriptionType.TRY.currencyName -> data?.TRY?.name
+        EnumCurrencyNamesDescriptionType.USD.currencyName -> data?.USD?.name
+        EnumCurrencyNamesDescriptionType.ZAR.currencyName -> data?.ZAR?.name
+
+        else -> data?.USD?.name
+
+    }
+
+fun getRate(type: String?, data: CurrencyInfoData?) =
     when (type) {
         EnumCurrencyRatesDescriptionType.AUD.symbol -> data?.AUD?.rate
         EnumCurrencyRatesDescriptionType.BGN.symbol -> data?.BGN?.rate
@@ -41,7 +82,7 @@ fun Any.getRate(type: String?, data: CurrencyInfoData?) =
         EnumCurrencyRatesDescriptionType.ZAR.symbol -> data?.ZAR?.rate
 
 
-        else -> data?.AUD?.rate
+        else -> data?.USD?.rate
     }
 
 

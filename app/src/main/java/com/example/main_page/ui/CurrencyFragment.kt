@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnAttach
+import androidx.core.view.doOnDetach
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,7 +29,7 @@ class CurrencyFragment : BaseFragment(R.layout.fragment_currency_main_page) {
     private lateinit var binding: FragmentCurrencyMainPageBinding
 
     companion object {
-        fun newInstance() = CurrencyFragment
+        fun newInstance() = CurrencyFragment()
     }
 
 
@@ -51,6 +53,11 @@ class CurrencyFragment : BaseFragment(R.layout.fragment_currency_main_page) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
 
+            viewModel.getCurrencyData(apikey = APIKEY)
+
+            binding.recyclerView.doOnAttach {
+                binding.recyclerView.layoutManager = layoutManager
+            }
 
             viewLifecycleOwner.lifecycleScope.launch {
                 viewModel.currencyInfoFlow.collect { currencyData ->
@@ -58,27 +65,33 @@ class CurrencyFragment : BaseFragment(R.layout.fragment_currency_main_page) {
                 }
             }
 
-            recyclerView.layoutManager = layoutManager
             recyclerView.setHasFixedSize(true)
-            adapter.onAttachedToRecyclerView(recyclerView)
             recyclerView.adapter = adapter
+            adapter.onAttachedToRecyclerView(recyclerView)
 
             viewLifecycleOwner.lifecycleScope.launch {
                 viewModel.isLoading.collect { isLoading ->
                     progressCurrency.isVisible = isLoading
                 }
             }
-            viewModel.getCurrencyData(apikey = APIKEY)
 
             convertCurrencyBtn.setOnClickListener {
                 replace(CurrencyConvertFragment.newInstance(), R.id.fragmentContainer)
             }
+
+
         }
     }
 
     fun showData(data: List<CurrencyInfo?>?) {
         Timber.d("______showData: $data")
         data?.let { adapter.setData(it) }
+    }
+
+
+    override fun onDestroyView() {
+        binding.recyclerView.layoutManager = null
+        super.onDestroyView()
     }
 }
 
