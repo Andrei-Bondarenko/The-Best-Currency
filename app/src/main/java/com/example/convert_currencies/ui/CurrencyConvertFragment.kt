@@ -13,8 +13,10 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import com.example.common.base_ui.BaseFragment
 import com.example.convert_currencies.model.currency_info.CurrencyInfoData
+import com.example.main_page.ui.CurrencyFragment
 import com.example.thebestcurrency.R
 import com.example.thebestcurrency.databinding.FragmentCurrencyConvertPageBinding
+import com.example.utils.extensions.replace
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 
@@ -107,6 +109,10 @@ class CurrencyConvertFragment : BaseFragment(R.layout.fragment_currency_convert_
                 if (currenciesEditText.text.toString() != "") {
                     currenciesEditText.setText("", TextView.BufferType.EDITABLE)
                 }
+            }
+
+            toolBarDetailPageTitle.setNavigationOnClickListener{
+                replace(CurrencyFragment.newInstance(), R.id.fragmentContainer)
             }
 
             currenciesEditText.doAfterTextChanged {
