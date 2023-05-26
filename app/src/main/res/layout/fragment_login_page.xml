@@ -7,24 +7,23 @@
     android:background="@color/black">
 
     <Button
-        android:id="@+id/registrationBtn"
+        android:id="@+id/loginBtn"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="30dp"
         android:background="@drawable/bg_item_currency"
-        android:text="@string/registration"
+        android:text="@string/btnLogin"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/passwordTextInputLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
+        app:layout_constraintEnd_toEndOf="parent" />
     <TextView
-        android:id="@+id/registerTextView"
+        android:id="@+id/loginTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:gravity="center"
-        android:text="@string/please_register"
+        android:text="@string/btnLogin"
         android:textColor="@color/white"
         android:textSize="48sp"
         app:layout_constraintBottom_toTopOf="@id/loginTextInputLayout"
@@ -51,10 +50,10 @@
             android:layout_height="match_parent"
             android:background="@drawable/bg_item_currency"
             android:hint="@string/login"
-            android:textSize="20sp"
-            android:layout_gravity="center"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
+            android:layout_gravity="center"
+            android:textSize="20sp"
             android:inputType="textEmailAddress"
             tools:ignore="SmallSp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -76,10 +75,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bg_item_currency"
+            android:layout_gravity="center"
             android:hint="@string/password"
             android:textSize="20sp"
             android:textColor="@color/white"
-            android:layout_gravity="center"
             android:textColorHint="@color/white"
             android:inputType="textPassword"
             tools:ignore="SmallSp" />
@@ -97,13 +96,13 @@
         />
 
     <TextView
-        android:id="@+id/loginTextView"
+        android:id="@+id/registerTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:text="@string/logintv"
+        android:text="@string/register"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/registrationBtn"
+        app:layout_constraintTop_toBottomOf="@id/loginBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:gravity="center"

@@ -8,15 +8,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import com.example.common.base_ui.BaseFragment
+import com.example.convert_currencies.ui.CurrencyConvertFragment
 import com.example.thebestcurrency.R
-import com.example.thebestcurrency.databinding.FragmentRegistrationPageBinding
+import com.example.thebestcurrency.databinding.FragmentLoginPageBinding
 import com.example.utils.extensions.replace
 import com.google.firebase.auth.FirebaseAuth
 import timber.log.Timber
 
-class RegistrationFragment : BaseFragment(R.layout.fragment_registration_page) {
-
-    private lateinit var binding: FragmentRegistrationPageBinding
+class LoginFragment : BaseFragment(R.layout.fragment_login_page) {
+    private lateinit var binding: FragmentLoginPageBinding
     private var email: String = ""
     private var password: String = ""
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -26,7 +26,7 @@ class RegistrationFragment : BaseFragment(R.layout.fragment_registration_page) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentRegistrationPageBinding.inflate(inflater, container, false)
+        binding = FragmentLoginPageBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -34,7 +34,7 @@ class RegistrationFragment : BaseFragment(R.layout.fragment_registration_page) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
 
-            registrationBtn.setOnClickListener {
+            loginBtn.setOnClickListener {
                 progressBar.isVisible = true
                 email = loginEditText.text.toString()
                 password = passwordEditText.text.toString()
@@ -45,45 +45,30 @@ class RegistrationFragment : BaseFragment(R.layout.fragment_registration_page) {
                     Toast.makeText(context, "Enter password", Toast.LENGTH_SHORT).show()
                     progressBar.isVisible = false
                 } else {
-                    auth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener { task ->
+                    auth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener() { task ->
                             progressBar.isVisible = false
                             if (task.isSuccessful) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Timber.d("createUserWithEmail:success")
+                                Toast.makeText(context, "Login is Successful", Toast.LENGTH_SHORT)
+                                    .show()
+                                Timber.d("signInWithEmail:success")
+                                replace(CurrencyFragment.newInstance(), R.id.fragmentContainer)
+
+                            } else {
+                                Timber.e("signInWithEmail:failure", task.exception)
                                 Toast.makeText(
                                     context,
-                                    "Account created.",
-                                    Toast.LENGTH_SHORT,
-                                ).show()
-                                replace(CurrencyFragment.newInstance(), R.id.fragmentContainer)
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Timber.e("createUserWithEmail:failure", task.exception)
-                                if (!email.contains("@gmail.com")) {
-                                    Toast.makeText(
-                                        context,
-                                        "This email does not exist.",
-                                        Toast.LENGTH_SHORT,
-                                    ).show()
-                                } else if (email.contains("@gmail.com")) {
-                                    Toast.makeText(
-                                        context,
-                                        "This email is occupied.",
-                                        Toast.LENGTH_SHORT,
-                                    ).show()
-                                } else  Toast.makeText(
-                                    context,
-                                    "Authentication is failed.",
-                                    Toast.LENGTH_SHORT,
-                                ).show()
+                                    "This email does not exist.",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
                             }
                         }
                 }
             }
-            loginTextView.setOnClickListener {
-                replace(LoginFragment(), R.id.fragmentContainer)
-            }
+                registerTextView.setOnClickListener {
+                    replace(RegistrationFragment(), R.id.fragmentContainer)
+                }
         }
     }
 
@@ -95,4 +80,5 @@ class RegistrationFragment : BaseFragment(R.layout.fragment_registration_page) {
             replace(CurrencyFragment.newInstance(), R.id.fragmentContainer)
         }
     }
+
 }

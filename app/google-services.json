@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "395304811347",
+    "project_id": "thebestcurrency-be43e",
+    "storage_bucket": "thebestcurrency-be43e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395304811347:android:3486566ebd5738ddbe3fa6",
+        "android_client_info": {
+          "package_name": "com.example.thebestcurrency"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaPK8xk5ZK19gvCebQw_nvYH-9hziY-xw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

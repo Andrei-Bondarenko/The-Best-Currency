@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.doOnAttach
-import androidx.core.view.doOnDetach
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +15,7 @@ import com.example.main_page.ui.adapter.CurrencyAdapter
 import com.example.thebestcurrency.R
 import com.example.thebestcurrency.databinding.FragmentCurrencyMainPageBinding
 import com.example.utils.extensions.replace
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import timber.log.Timber
@@ -27,7 +27,7 @@ class CurrencyFragment : BaseFragment(R.layout.fragment_currency_main_page) {
 
     private val viewModel: CurrencyViewModel by inject()
     private lateinit var binding: FragmentCurrencyMainPageBinding
-
+    private val auth = FirebaseAuth.getInstance()
     companion object {
         fun newInstance() = CurrencyFragment()
     }
@@ -52,6 +52,13 @@ class CurrencyFragment : BaseFragment(R.layout.fragment_currency_main_page) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
+            var user = auth.currentUser
+            if (user == null) replace(LoginFragment(), R.id.fragmentContainer)
+
+            logoutTextView.setOnClickListener {
+                 FirebaseAuth.getInstance().signOut()
+                replace(LoginFragment(), R.id.fragmentContainer)
+            }
 
             viewModel.getCurrencyData(apikey = APIKEY)
 

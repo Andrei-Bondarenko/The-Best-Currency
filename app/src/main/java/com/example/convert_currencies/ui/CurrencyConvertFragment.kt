@@ -1,5 +1,6 @@
 package com.example.convert_currencies.ui
 
+
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,8 +15,6 @@ import com.example.common.base_ui.BaseFragment
 import com.example.convert_currencies.model.currency_info.CurrencyInfoData
 import com.example.thebestcurrency.R
 import com.example.thebestcurrency.databinding.FragmentCurrencyConvertPageBinding
-import com.example.utils.extensions.getName
-import com.example.utils.extensions.getRate
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 
@@ -32,7 +31,6 @@ class CurrencyConvertFragment : BaseFragment(R.layout.fragment_currency_convert_
     private var currenciesCount: Double = 1.0
     private var baseCurrencyCount: Double = 1.0
     private var currenciesRate: Double? = 0.0
-    private var currencyInfoData: CurrencyInfoData? = null
 
     companion object {
         fun newInstance() = CurrencyConvertFragment()
@@ -63,44 +61,70 @@ class CurrencyConvertFragment : BaseFragment(R.layout.fragment_currency_convert_
             )
 
             observe(viewModel.currencyInfoFlow) { currencyData ->
-                if (currencyData != null) {
-                    showData(currencyData)
+                currenciesName.text =
+                    viewModel.getName(currencyName = currencies, data = currencyData)
+                baseCurrencyName.text =
+                    viewModel.getName(currencyName = baseCurrency, data = currencyData)
+
+                currenciesRate = viewModel.getRate(currencies, currencyData)
+
+                val firstEditText = baseCurrencyEditText.text.toString()
+                val secondEditText = currenciesEditText.text.toString()
+
+                when (viewModel.checkEditTexts(firstEditText, secondEditText)) {
+                    1 -> {
+                        currenciesTextView.text =
+                            viewModel.setSecondCurrencyTV(baseCurrencyCount, currenciesRate)
+                        baseCurrencyTextView.text = baseCurrencyEditText.text
+                    }
+                    2 -> {
+                        baseCurrencyTextView.text =
+                            viewModel.setFirstCurrencyTV(currenciesCount, currenciesRate)
+                        currenciesTextView.text = currenciesEditText.text
+                    }
+                    3 -> {
+                        currenciesTextView.text =
+                            viewModel.setSecondCurrencyTV(baseCurrencyCount, currenciesRate)
+                        baseCurrencyTextView.text = "1"
+                    }
                 }
-                currencyInfoData = currencyData
             }
 
             observe(viewModel.isLoading) { isLoading ->
                 progressCurrency.isVisible = isLoading
             }
 
-            buttonCalculate.setOnClickListener {
-                viewModel.getCurrencyConvertData(
-                    apikey = APIKEY,
-                    baseCurrency = baseCurrency,
-                    currencies = currencies
-                )
-                showData(currencyInfoData)
-            }
             baseCurrencyEditText.doAfterTextChanged {
-                if (currenciesEditText.text.toString() != "") {
-                    currenciesEditText.setText("", TextView.BufferType.EDITABLE)
-                }
                 if (it.isNullOrEmpty()) {
                     baseCurrencyTextView.text = "1"
+                    currenciesCount = 1.0
                 } else {
                     baseCurrencyCount = it.toString().toDouble()
                 }
-
+                currenciesTextView.text =
+                    viewModel.setSecondCurrencyTV(baseCurrencyCount, currenciesRate)
+                baseCurrencyTextView.text = baseCurrencyEditText.text
+                if (currenciesEditText.text.toString() != "") {
+                    currenciesEditText.setText("", TextView.BufferType.EDITABLE)
+                }
             }
 
             currenciesEditText.doAfterTextChanged {
-                if (baseCurrencyEditText.text.toString() != "1") {
-                    baseCurrencyEditText.setText("1", TextView.BufferType.EDITABLE)
-                }
                 if (it.isNullOrEmpty()) {
                     currenciesTextView.text = "1"
+                    baseCurrencyTextView.text = ""
+                    currenciesTextView.text = ""
                 } else {
                     currenciesCount = it.toString().toDouble()
+                    baseCurrencyTextView.text =
+                        viewModel.setFirstCurrencyTV(currenciesCount, currenciesRate)
+                    currenciesTextView.text = currenciesEditText.text
+                }
+                baseCurrencyTextView.text =
+                    viewModel.setFirstCurrencyTV(currenciesCount, currenciesRate)
+                currenciesTextView.text = currenciesEditText.text
+                if (baseCurrencyEditText.text.toString() != "1") {
+                    baseCurrencyEditText.setText("1", TextView.BufferType.EDITABLE)
                 }
             }
 
@@ -122,41 +146,20 @@ class CurrencyConvertFragment : BaseFragment(R.layout.fragment_currency_convert_
         }
     }
 
-
-    @SuppressLint("ResourceType")
-    fun showData(data: CurrencyInfoData?) {
-        with(binding) {
-
-            Timber.d("CURRENCY_DATA ==== $data")
-            currenciesName.text = getName(currencyName = currencies,data = data)
-            baseCurrencyName.text = getName(currencyName = baseCurrency,data = data)
-            currenciesRate = getRate(currencies, data)
-            if (currenciesEditText.text.toString() == "" && baseCurrencyEditText.text.toString() != "1") {
-                Timber.d("WORKED FIRST IF")
-                currenciesTextView.text =
-                    (currenciesRate?.let { baseCurrencyCount.times(it) }).toString()
-                baseCurrencyTextView.text = baseCurrencyEditText.text
-            } else if (currenciesEditText.text.toString() != "" && baseCurrencyEditText.text.toString() == "1") {
-                Timber.d("WORKED SECOND IF")
-                baseCurrencyTextView.text =
-                    (currenciesRate?.let { currenciesCount.div(it) }).toString()
-                currenciesTextView.text = currenciesEditText.text
-            } else if (currenciesEditText.text.toString() == "" && baseCurrencyEditText.text.toString() == "1") {
-                Timber.d("WORKED THIRD IF")
-                currenciesTextView.text =
-                    (currenciesRate?.let { baseCurrencyCount.times(it) }).toString()
-                baseCurrencyTextView.text = "1"
-            }
-        }
-    }
-
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         with(binding) {
             baseCurrency = spinnerBaseCurrency.selectedItem.toString()
             currencies = spinnerCurrencies.selectedItem.toString()
+
+            viewModel.getCurrencyConvertData(
+                apikey = APIKEY,
+                baseCurrency = baseCurrency,
+                currencies = currencies
+            )
         }
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
+
     }
 }
