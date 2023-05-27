@@ -1,9 +1,6 @@
 package com.example.utils.extensions
 
-import com.example.convert_currencies.model.currency_info.CurrencyInfoData
-import com.example.convert_currencies.ui.EnumCurrencyNamesDescriptionType
 import com.example.main_page.ui.adapter.EnumCurrencyDescriptionType
-import com.example.convert_currencies.ui.EnumCurrencyRatesDescriptionType
 import com.example.thebestcurrency.R
 
 

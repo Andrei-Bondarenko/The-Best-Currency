@@ -1,7 +1,6 @@
 package com.example.convert_currencies.ui
 
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,13 +11,11 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import com.example.common.base_ui.BaseFragment
-import com.example.convert_currencies.model.currency_info.CurrencyInfoData
 import com.example.main_page.ui.CurrencyFragment
 import com.example.thebestcurrency.R
 import com.example.thebestcurrency.databinding.FragmentCurrencyConvertPageBinding
 import com.example.utils.extensions.replace
 import org.koin.android.ext.android.inject
-import timber.log.Timber
 
 
 private const val APIKEY = "Ujqc2SLtPZv6C4WcyTMrPHIfbRrjnweCUmAm3JWn"

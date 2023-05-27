@@ -43,6 +43,7 @@ class CurrencyViewModel(
 
     fun setFirstCurrencyTV(currencyAmount: Double, currencyRate: Double?) =
         (currencyRate?.let { currencyAmount.div(it) }).toString()
+
     fun setSecondCurrencyTV(currencyAmount: Double, currencyRate: Double?) =
         (currencyRate?.let { currencyAmount.times(it) }).toString()
 
@@ -95,38 +96,38 @@ class CurrencyViewModel(
 
     fun getName(currencyName: String, data: CurrencyInfoData?) =
         when (currencyName) {
-            EnumCurrencyNamesDescriptionType.AUD.currencyName -> data?.AUD?.name
-            EnumCurrencyNamesDescriptionType.BGN.currencyName -> data?.BGN?.name
-            EnumCurrencyNamesDescriptionType.BRL.currencyName -> data?.BRL?.name
-            EnumCurrencyNamesDescriptionType.CAD.currencyName -> data?.CAD?.name
-            EnumCurrencyNamesDescriptionType.CHF.currencyName -> data?.CHF?.name
-            EnumCurrencyNamesDescriptionType.CNY.currencyName -> data?.CNY?.name
-            EnumCurrencyNamesDescriptionType.CZK.currencyName -> data?.CZK?.name
-            EnumCurrencyNamesDescriptionType.DKK.currencyName -> data?.DKK?.name
-            EnumCurrencyNamesDescriptionType.EUR.currencyName -> data?.EUR?.name
-            EnumCurrencyNamesDescriptionType.HKD.currencyName -> data?.HKD?.name
-            EnumCurrencyNamesDescriptionType.HRK.currencyName -> data?.HRK?.name
-            EnumCurrencyNamesDescriptionType.HUF.currencyName -> data?.HUF?.name
-            EnumCurrencyNamesDescriptionType.IDR.currencyName -> data?.IDR?.name
-            EnumCurrencyNamesDescriptionType.ILS.currencyName -> data?.ILS?.name
-            EnumCurrencyNamesDescriptionType.INR.currencyName -> data?.INR?.name
-            EnumCurrencyNamesDescriptionType.ISK.currencyName -> data?.ISK?.name
-            EnumCurrencyNamesDescriptionType.JPY.currencyName -> data?.JPY?.name
-            EnumCurrencyNamesDescriptionType.KRW.currencyName -> data?.KRW?.name
-            EnumCurrencyNamesDescriptionType.MXN.currencyName -> data?.MXN?.name
-            EnumCurrencyNamesDescriptionType.MYR.currencyName -> data?.MYR?.name
-            EnumCurrencyNamesDescriptionType.NOK.currencyName -> data?.NOK?.name
-            EnumCurrencyNamesDescriptionType.NZD.currencyName -> data?.NZD?.name
-            EnumCurrencyNamesDescriptionType.PHP.currencyName -> data?.PHP?.name
-            EnumCurrencyNamesDescriptionType.PLN.currencyName -> data?.PLN?.name
-            EnumCurrencyNamesDescriptionType.RON.currencyName -> data?.RON?.name
-            EnumCurrencyNamesDescriptionType.RUB.currencyName -> data?.RUB?.name
-            EnumCurrencyNamesDescriptionType.SEK.currencyName -> data?.SEK?.name
-            EnumCurrencyNamesDescriptionType.SGD.currencyName -> data?.SGD?.name
-            EnumCurrencyNamesDescriptionType.THB.currencyName -> data?.THB?.name
-            EnumCurrencyNamesDescriptionType.TRY.currencyName -> data?.TRY?.name
-            EnumCurrencyNamesDescriptionType.USD.currencyName -> data?.USD?.name
-            EnumCurrencyNamesDescriptionType.ZAR.currencyName -> data?.ZAR?.name
+            CurrencyEnum.AUD.currencyName -> data?.AUD?.name
+            CurrencyEnum.BGN.currencyName -> data?.BGN?.name
+            CurrencyEnum.BRL.currencyName -> data?.BRL?.name
+            CurrencyEnum.CAD.currencyName -> data?.CAD?.name
+            CurrencyEnum.CHF.currencyName -> data?.CHF?.name
+            CurrencyEnum.CNY.currencyName -> data?.CNY?.name
+            CurrencyEnum.CZK.currencyName -> data?.CZK?.name
+            CurrencyEnum.DKK.currencyName -> data?.DKK?.name
+            CurrencyEnum.EUR.currencyName -> data?.EUR?.name
+            CurrencyEnum.HKD.currencyName -> data?.HKD?.name
+            CurrencyEnum.HRK.currencyName -> data?.HRK?.name
+            CurrencyEnum.HUF.currencyName -> data?.HUF?.name
+            CurrencyEnum.IDR.currencyName -> data?.IDR?.name
+            CurrencyEnum.ILS.currencyName -> data?.ILS?.name
+            CurrencyEnum.INR.currencyName -> data?.INR?.name
+            CurrencyEnum.ISK.currencyName -> data?.ISK?.name
+            CurrencyEnum.JPY.currencyName -> data?.JPY?.name
+            CurrencyEnum.KRW.currencyName -> data?.KRW?.name
+            CurrencyEnum.MXN.currencyName -> data?.MXN?.name
+            CurrencyEnum.MYR.currencyName -> data?.MYR?.name
+            CurrencyEnum.NOK.currencyName -> data?.NOK?.name
+            CurrencyEnum.NZD.currencyName -> data?.NZD?.name
+            CurrencyEnum.PHP.currencyName -> data?.PHP?.name
+            CurrencyEnum.PLN.currencyName -> data?.PLN?.name
+            CurrencyEnum.RON.currencyName -> data?.RON?.name
+            CurrencyEnum.RUB.currencyName -> data?.RUB?.name
+            CurrencyEnum.SEK.currencyName -> data?.SEK?.name
+            CurrencyEnum.SGD.currencyName -> data?.SGD?.name
+            CurrencyEnum.THB.currencyName -> data?.THB?.name
+            CurrencyEnum.TRY.currencyName -> data?.TRY?.name
+            CurrencyEnum.USD.currencyName -> data?.USD?.name
+            CurrencyEnum.ZAR.currencyName -> data?.ZAR?.name
 
             else -> data?.USD?.name
 
