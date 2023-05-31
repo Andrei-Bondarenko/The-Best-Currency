@@ -30,6 +30,20 @@ class CurrencyConvertFragment : BaseFragment(R.layout.fragment_currency_convert_
     private var currenciesCount: Double = 1.0
     private var baseCurrencyCount: Double = 1.0
     private var currenciesRate: Double? = 0.0
+    private val baseCurrencyAdapter by lazy {
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.currencies,
+            R.layout.item_currency_convert
+        )
+    }
+    private val currenciesAdapter by lazy {
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.currencies,
+            R.layout.item_currency_convert
+        )
+    }
 
     companion object {
         fun newInstance() = CurrencyConvertFragment()
@@ -67,85 +81,93 @@ class CurrencyConvertFragment : BaseFragment(R.layout.fragment_currency_convert_
 
                 currenciesRate = viewModel.getRate(currencies, currencyData)
 
-                val firstEditText = baseCurrencyEditText.text.toString()
-                val secondEditText = currenciesEditText.text.toString()
-
-                when (viewModel.checkEditTexts(firstEditText, secondEditText)) {
-                    1 -> {
-                        currenciesTextView.text =
-                            viewModel.setSecondCurrencyTV(baseCurrencyCount, currenciesRate)
-                        baseCurrencyTextView.text = baseCurrencyEditText.text
-                    }
-                    2 -> {
-                        baseCurrencyTextView.text =
-                            viewModel.setFirstCurrencyTV(currenciesCount, currenciesRate)
-                        currenciesTextView.text = currenciesEditText.text
-                    }
-                    3 -> {
-                        currenciesTextView.text =
-                            viewModel.setSecondCurrencyTV(baseCurrencyCount, currenciesRate)
-                        baseCurrencyTextView.text = "1"
-                    }
-                }
+                variantsTV(baseCurrencyEditText.text.toString(), currenciesEditText.text.toString())
             }
 
             observe(viewModel.isLoading) { isLoading ->
                 progressCurrency.isVisible = isLoading
             }
 
-            baseCurrencyEditText.doAfterTextChanged {
-                if (it.isNullOrEmpty()) {
-                    baseCurrencyTextView.text = "1"
-                    currenciesCount = 1.0
-                } else {
-                    baseCurrencyCount = it.toString().toDouble()
-                }
-                currenciesTextView.text =
-                    viewModel.setSecondCurrencyTV(baseCurrencyCount, currenciesRate)
-                baseCurrencyTextView.text = baseCurrencyEditText.text
-                if (currenciesEditText.text.toString() != "") {
-                    currenciesEditText.setText("", TextView.BufferType.EDITABLE)
-                }
-            }
-
-            toolBarDetailPageTitle.setNavigationOnClickListener{
+            toolBarDetailPageTitle.setNavigationOnClickListener {
                 replace(CurrencyFragment.newInstance(), R.id.fragmentContainer)
             }
 
+            baseCurrencyEditText.doAfterTextChanged {
+                baseCurrencyEditTextFunction()
+            }
+
             currenciesEditText.doAfterTextChanged {
-                if (it.isNullOrEmpty()) {
-                    currenciesTextView.text = "1"
-                    baseCurrencyTextView.text = ""
-                    currenciesTextView.text = ""
-                } else {
-                    currenciesCount = it.toString().toDouble()
+                currenciesEditTextFunction()
+            }
+
+
+            baseCurrencyAdapter.setDropDownViewResource(R.layout.item_drop_down_list)
+            currenciesAdapter.setDropDownViewResource(R.layout.item_drop_down_list)
+
+            if (spinnerBaseCurrency.adapter == null) spinnerBaseCurrency.adapter =
+                baseCurrencyAdapter
+            if (spinnerCurrencies.adapter == null) spinnerCurrencies.adapter =
+                currenciesAdapter
+        }
+    }
+
+    private fun variantsTV(firstEditText: String, secondEditText: String) {
+        with(binding) {
+            when (viewModel.checkEditTexts(firstEditText, secondEditText)) {
+                1 -> {
+                    currenciesTextView.text =
+                        viewModel.setSecondCurrencyTV(baseCurrencyCount, currenciesRate)
+                    baseCurrencyTextView.text = baseCurrencyEditText.text
+                }
+                2 -> {
                     baseCurrencyTextView.text =
                         viewModel.setFirstCurrencyTV(currenciesCount, currenciesRate)
                     currenciesTextView.text = currenciesEditText.text
                 }
+                3 -> {
+                    currenciesTextView.text =
+                        viewModel.setSecondCurrencyTV(baseCurrencyCount, currenciesRate)
+                    baseCurrencyTextView.text = "1"
+                }
+            }
+        }
+    }
+
+    private fun baseCurrencyEditTextFunction() {
+        with(binding) {
+            if (baseCurrencyEditText.text.isNullOrEmpty()) {
+                baseCurrencyTextView.text = "1"
+                currenciesCount = 1.0
+            } else {
+                baseCurrencyCount = baseCurrencyEditText.text.toString().toDouble()
+            }
+            currenciesTextView.text =
+                viewModel.setSecondCurrencyTV(baseCurrencyCount, currenciesRate)
+            baseCurrencyTextView.text = baseCurrencyEditText.text
+            if (currenciesEditText.text.toString() != "") {
+                currenciesEditText.setText("", TextView.BufferType.EDITABLE)
+            }
+        }
+    }
+
+    private fun currenciesEditTextFunction() {
+        with(binding) {
+            if (currenciesEditText.text.isNullOrEmpty()) {
+                currenciesTextView.text = "1"
+                baseCurrencyTextView.text = ""
+                currenciesTextView.text = ""
+            } else {
+                currenciesCount = currenciesEditText.text.toString().toDouble()
                 baseCurrencyTextView.text =
                     viewModel.setFirstCurrencyTV(currenciesCount, currenciesRate)
                 currenciesTextView.text = currenciesEditText.text
-                if (baseCurrencyEditText.text.toString() != "1") {
-                    baseCurrencyEditText.setText("1", TextView.BufferType.EDITABLE)
-                }
             }
-
-            val baseCurrencyAdapter = ArrayAdapter.createFromResource(
-                requireContext(),
-                R.array.currencies,
-                R.layout.item_currency_convert
-            )
-            val currenciesAdapter = ArrayAdapter.createFromResource(
-                requireContext(),
-                R.array.currencies,
-                R.layout.item_currency_convert
-            )
-            baseCurrencyAdapter.setDropDownViewResource(R.layout.item_drop_down_list)
-            currenciesAdapter.setDropDownViewResource(R.layout.item_drop_down_list)
-
-            spinnerBaseCurrency.adapter = baseCurrencyAdapter
-            spinnerCurrencies.adapter = currenciesAdapter
+            baseCurrencyTextView.text =
+                viewModel.setFirstCurrencyTV(currenciesCount, currenciesRate)
+            currenciesTextView.text = currenciesEditText.text
+            if (baseCurrencyEditText.text.toString() != "1") {
+                baseCurrencyEditText.setText("1", TextView.BufferType.EDITABLE)
+            }
         }
     }
 

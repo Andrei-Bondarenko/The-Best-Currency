@@ -5,7 +5,7 @@
     <string name="calculate">calculate</string>
     <string name="amount_of_currency">Amount Of Currency</string>
     <string name="_one">1</string>
-    <string name="convert_currency">Convert Currency</string>
+    <string name="currency_conversion">Currency Conversion</string>
     <string name="login">   Email Address </string>
     <string name="password">   Password</string>
     <string name="please_register">Registration</string>

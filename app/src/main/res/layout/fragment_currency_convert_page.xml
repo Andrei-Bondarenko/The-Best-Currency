@@ -4,24 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
-
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolBarDetailPageTitle"
+    android:background="@color/black">
+    
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarDetailPageTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="24dp"
         android:shadowColor="#FFFFFF"
-        android:shadowDx="0.0"
-        android:shadowDy="0.0"
+        android:layout_margin="10dp"
         android:shadowRadius="8"
         android:background="@drawable/bg_item_list_drop_down"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/white"
-        app:navigationIcon="@drawable/ic_arrow_back"/>
+        app:titleTextColor="@color/white">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolBarDetailPageTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:navigationIcon="@drawable/ic_arrow_back">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/currency_conversion"
+            android:textColor="@color/white"
+            android:textSize="25sp"/>
+
+    </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
 
     <Spinner
         android:id="@+id/spinnerBaseCurrency"
@@ -34,7 +48,7 @@
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toStartOf="@id/spinnerCurrencies"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolBarDetailPageTitle" />
+        app:layout_constraintTop_toBottomOf="@id/appBarDetailPageTitle" />
 
     <Spinner
         android:id="@+id/spinnerCurrencies"
@@ -47,7 +61,7 @@
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/spinnerBaseCurrency"
-        app:layout_constraintTop_toBottomOf="@id/toolBarDetailPageTitle" />
+        app:layout_constraintTop_toBottomOf="@id/appBarDetailPageTitle" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/baseCurrencyInputLayout"
@@ -65,8 +79,8 @@
             android:hint="@string/amount_of_currency"
             android:inputType="number"
             android:text="@string/_one"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:textSize="30sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -88,8 +102,8 @@
             android:hint="@string/amount_of_currency"
             android:inputType="number"
             android:text=""
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:textSize="30sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -113,7 +127,7 @@
             android:gravity="end"
             android:maxLines="1"
             android:text=""
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="30sp"
             app:layout_constraintEnd_toStartOf="@id/currenciesTextView"
             app:layout_constraintStart_toStartOf="parent"
@@ -126,7 +140,7 @@
             android:layout_margin="10dp"
             android:maxLines="1"
             android:text=""
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="15sp"
             app:layout_constraintEnd_toStartOf="@id/currenciesName"
             app:layout_constraintStart_toStartOf="parent"
@@ -153,7 +167,7 @@
             android:layout_margin="10dp"
             android:maxLines="1"
             android:text=""
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/baseCurrencyTextView"
@@ -166,7 +180,7 @@
             android:layout_margin="10dp"
             android:maxLines="1"
             android:text=""
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/baseCurrencyName"

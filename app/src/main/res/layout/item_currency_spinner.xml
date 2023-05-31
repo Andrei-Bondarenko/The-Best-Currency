@@ -8,6 +8,8 @@
     android:maxLines="1"
     android:padding="16dp"
     android:textAppearance="?attr/textAppearanceSubtitle1"
-    android:textColor="@color/white">
+    android:textColor="@color/white"
+    android:textSize="10sp"
+    tools:ignore="SmallSp">
 
 </TextView>

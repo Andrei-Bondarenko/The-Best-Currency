@@ -10,9 +10,9 @@ class CurrencyRemoteRepository (
     ): CurrencyInfoRepository {
 
 
-    override suspend fun getCurrencyInfoData(apikey: String): List<CurrencyInfo?> {
+    override suspend fun getCurrencyInfoData(apikey: String,baseCurrencies: String): List<CurrencyInfo?> {
         val infoData = api.getCurrencyInfoData(apikey)
-        val ratesData = api.getCurrencyRatesData(apikey)
+        val ratesData = api.getCurrencyRatesData(apikey,baseCurrencies)
         Timber.d("INFODATA ===== $infoData \n RATESDATA ====$ratesData")
         return CurrencyConverter.fromNetworkInfo(infoData.data,ratesData.data)
     }

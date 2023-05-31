@@ -14,19 +14,17 @@ class CurrencyViewModel(
 ) : ViewModel() {
 
     private val _currencyInfoFlow = MutableStateFlow<List<CurrencyInfo?>?>(null)
-    val currencyInfoFlow: StateFlow<List<CurrencyInfo?>?>
-        get() = _currencyInfoFlow.asStateFlow()
+    val currencyInfoFlow = _currencyInfoFlow.asStateFlow()
 
     private val _isLoading = MutableStateFlow(false)
-    val isLoading: StateFlow<Boolean>
-        get() = _isLoading.asStateFlow()
+    val isLoading = _isLoading.asStateFlow()
 
 
-    fun getCurrencyData(apikey: String) {
+    fun getCurrencyData(apikey: String, baseCurrency: String) {
         viewModelScope.launch {
             try {
                 _isLoading.value = true
-                val currencyInfoData = interactor.getCurrencyInfoData(apikey)
+                val currencyInfoData = interactor.getCurrencyInfoData(apikey, baseCurrency)
                 _currencyInfoFlow.emit(currencyInfoData)
             } catch (t: Throwable) {
                 Timber.e(t.message)

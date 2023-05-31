@@ -6,8 +6,8 @@ import com.example.main_page.repository.CurrencyInfoRepository
 class CurrencyInteractor(
     private val currencyInfoRepository: CurrencyInfoRepository,
 ) {
-    suspend fun getCurrencyInfoData(apikey: String): List<CurrencyInfo?> {
-        return currencyInfoRepository.getCurrencyInfoData(apikey)
+    suspend fun getCurrencyInfoData(apikey: String, baseCurrencies: String): List<CurrencyInfo?> {
+        return currencyInfoRepository.getCurrencyInfoData(apikey,baseCurrencies)
     }
 
 

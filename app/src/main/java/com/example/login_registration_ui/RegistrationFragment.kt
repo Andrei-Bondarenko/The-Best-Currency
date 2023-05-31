@@ -1,4 +1,4 @@
-package com.example.main_page.ui
+package com.example.login_registration_ui
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import com.example.common.base_ui.BaseFragment
+import com.example.main_page.ui.CurrencyFragment
 import com.example.thebestcurrency.R
 import com.example.thebestcurrency.databinding.FragmentRegistrationPageBinding
 import com.example.utils.extensions.replace

@@ -4,8 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.example.main_page.ui.CurrencyFragment
-import com.example.main_page.ui.RegistrationFragment
+import com.example.login_registration_ui.RegistrationFragment
 import com.example.thebestcurrency.R
 
 class RootActivity : AppCompatActivity() {

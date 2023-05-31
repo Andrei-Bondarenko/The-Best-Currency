@@ -42,17 +42,21 @@ class CurrencyViewModel(
     }
 
     fun setFirstCurrencyTV(currencyAmount: Double, currencyRate: Double?) =
-        (currencyRate?.let { currencyAmount.div(it) }).toString()
+        if ((currencyRate?.let { currencyAmount.div(it)}.toString().substring(1).contains(".0")))
+            (currencyRate?.let { currencyAmount.div(it) })?.toInt().toString()
+        else currencyRate?.let { currencyAmount.times(it) }.toString()
 
     fun setSecondCurrencyTV(currencyAmount: Double, currencyRate: Double?) =
-        (currencyRate?.let { currencyAmount.times(it) }).toString()
+        if ((currencyRate?.let { currencyAmount.times(it)}.toString().substring(1).contains(".0")))
+                currencyRate?.let { currencyAmount.times(it) }?.toInt().toString()
+             else currencyRate?.let { currencyAmount.times(it) }.toString()
 
 
     fun checkEditTexts(firstEditText: String, secondEditText: String): Int {
-        if (firstEditText != "1" && secondEditText == "") return 1
-        else if (firstEditText == "1" && secondEditText != "") return 2
-        else if (firstEditText == "1" && secondEditText == "") return 3
-        else return 4
+        return if (firstEditText != "1" && secondEditText == "") 1
+        else if (firstEditText == "1" && secondEditText != "") 2
+        else if (firstEditText == "1" && secondEditText == "") 3
+        else 4
     }
 
     fun getRate(type: String?, data: CurrencyInfoData?) =

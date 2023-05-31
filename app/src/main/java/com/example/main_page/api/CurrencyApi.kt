@@ -16,6 +16,7 @@ interface CurrencyApi {
     @GET("v1/latest")
     suspend fun getCurrencyRatesData(
         @Query("apikey") apikey: String,
+        @Query("base_currency") base_currency: String,
     ): CurrencyRatesDataListResponse
 
 }
